@@ -61,7 +61,7 @@ const Navbar = () => {
               </li>
             </Link>
           </ul>
-          <div className='mx-auto sm:pl-8 py-3 w-1/2 flex flex-row md:justify-end justify-between'>
+          <div className='mx-auto sm:pl-8 py-3  flex flex-row md:justify-end justify-between'>
             <form onSubmit={handleSubmit}>
               <input
                 type='text'
