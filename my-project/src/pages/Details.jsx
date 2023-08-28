@@ -17,7 +17,6 @@ const Details = ({ userName }) => {
 
   useEffect(() => {
     const fetchDocument = async () => {
-      
       const docRef = doc(db, "movies", id);
 
       try {
@@ -25,9 +24,7 @@ const Details = ({ userName }) => {
 
         if (docSnapshot.exists()) {
           setDocData(docSnapshot.data());
-          
         } else {
-          
         }
       } catch (error) {
         console.error("Error fetching document:", error);
@@ -40,7 +37,7 @@ const Details = ({ userName }) => {
   useEffect(() => {
     if (docData) {
       // Check if title is not null or undefined
-      const url = `http://www.omdbapi.com/?t=${docData.title}&y=${docData.year}&plot=full&apikey=59dceb91`;
+      const url = `http://www.omdbapi.com/?t=${docData.title}&y=${docData.year}&plot=full&apikey=ad59922c`;
 
       const fetchData = async () => {
         try {
@@ -51,16 +48,13 @@ const Details = ({ userName }) => {
           setIsLoading(false);
           setUserRatingData(ratingData);
         } catch (error) {
-          
           setIsLoading(false);
         }
       };
 
       fetchData();
-      
     }
   }, [docData]);
-  
 
   const ratingData = {};
   for (const key in docData) {
@@ -78,13 +72,9 @@ const Details = ({ userName }) => {
       count++;
     }
   }
-  
-  
 
   const averageRating = count > 0 ? sum / count : 0;
   const roundedRating = count > 0 ? Math.round(averageRating * 2) / 2 : 0;
-
-  
 
   return (
     <>
