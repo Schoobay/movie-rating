@@ -8,7 +8,7 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
 
   useEffect(() => {
     if (title) {
-      const url = `http://www.omdbapi.com/?t=${title}&apikey=59dceb91`;
+      const url = `http://www.omdbapi.com/?t=${title}&apikey=ad59922c`;
 
       const fetchData = async () => {
         try {
@@ -18,7 +18,6 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
           setData(data);
           setIsLoading(false);
         } catch (error) {
-          
           setIsLoading(false);
         }
       };

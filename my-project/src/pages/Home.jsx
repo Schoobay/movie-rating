@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const q = query(collection(db, "movies"), limit(500));
+      const q = query(collection(db, "movies"), limit(800));
       const querySnapshot = await getDocs(q);
 
       const moviesData = [];
