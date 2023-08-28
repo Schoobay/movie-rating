@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const q = query(collection(db, "movies"), limit(20));
+      const q = query(collection(db, "movies"), limit(500));
       const querySnapshot = await getDocs(q);
 
       const moviesData = [];
@@ -34,8 +34,6 @@ const Home = () => {
         );
       }
 
-      
-
       setMovieData(filteredMovies);
       setIsLoading(false);
     };
@@ -45,7 +43,6 @@ const Home = () => {
 
   useEffect(() => {
     if (movieData) {
-      
     }
   }, [movieData]);
 
