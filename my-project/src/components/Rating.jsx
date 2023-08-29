@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { db } from "../firebase/config";
 import { updateDoc, doc, serverTimestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Rating = ({ userRatingData, userName, id }) => {
   const [selectedRating, setSelectedRating] = useState(0);
@@ -22,6 +23,7 @@ const Rating = ({ userRatingData, userName, id }) => {
     return options;
   };
 
+  const navigate = useNavigate();
   const userRatingsArray = Object.entries(userRatingData);
 
   // Sort the array in descending order based on the rating
@@ -38,6 +40,7 @@ const Rating = ({ userRatingData, userName, id }) => {
         [userName]: parseFloat(selectedRating),
         timestamp: serverTimestamp(),
       });
+      window.location.reload();
     } catch (error) {
       console.error("Error updating rating:", error);
     }

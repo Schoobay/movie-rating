@@ -40,7 +40,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className='bg-white border-gray-200 dark:bg-gray-900'>
+      <nav className=' border-gray-200 bg-gray-900'>
         <div className='container  md:justify-between mx-auto py-3 px-10 font-bold flex md:flex-row flex-col items-center'>
           <ul className=' sm:pl-5 sm:pr-2 flex flex-row divide-x'>
             <li

@@ -52,7 +52,6 @@ const AddMovie = ({ userName }) => {
       );
 
       if (!querySnapshot.empty) {
-        
         setError(true);
         return;
       }
@@ -68,13 +67,11 @@ const AddMovie = ({ userName }) => {
       });
 
       try {
-        const docRef = await addDoc(collection(db, "movies-test"), movieData);
-        
+        const docRef = await addDoc(collection(db, "movies"), movieData);
       } catch (error) {
         console.error("Error adding document: ", error);
       }
     } else {
-      
     }
   };
   return (

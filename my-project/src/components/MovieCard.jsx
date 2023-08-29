@@ -28,7 +28,12 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
 
   const ratingData = {};
   for (const key in movie) {
-    if (key !== "year" && key !== "title" && key !== "id") {
+    if (
+      key !== "year" &&
+      key !== "title" &&
+      key !== "id" &&
+      key !== "timestamp"
+    ) {
       ratingData[key] = movie[key];
     }
   }
@@ -53,7 +58,7 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <div className='max-w-sm h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+        <div className='w-full h-full  rounded-lg shadow bg-gray-800 border-gray-700'>
           <div>
             <img
               className='rounded-t-lg object-cover w-full h-2/3 '
@@ -63,11 +68,11 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
           </div>
           <div className='p-5'>
             <div>
-              <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1'>
+              <h5 className='mb-2 text-2xl font-bold tracking-tight text-white line-clamp-1'>
                 {title}
               </h5>
             </div>
-            <p className='mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-2'>
+            <p className='mb-3 font-normal  text-gray-400 line-clamp-2'>
               {data ? data.Plot : ""}
             </p>
             <h3 className='font-extrabold '>Rating: {roundedRating}</h3>
