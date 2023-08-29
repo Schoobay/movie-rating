@@ -51,7 +51,7 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
 
   const averageRating = count > 0 ? sum / count : 0;
 
-  const roundedRating = count > 0 ? Math.round(averageRating * 2) / 2 : 0;
+  const roundedRating = count > 0 ? Math.round(averageRating * 10) / 10 : 0;
 
   return (
     <>
