@@ -37,7 +37,7 @@ const Details = ({ userName }) => {
   useEffect(() => {
     if (docData) {
       // Check if title is not null or undefined
-      const url = `http://www.omdbapi.com/?t=${docData.title}&y=${docData.year}&plot=full&apikey=ad59922c`;
+      const url = `http://www.omdbapi.com/?t=${docData.title}&plot=full&apikey=ad59922c`;
 
       const fetchData = async () => {
         try {
@@ -55,6 +55,7 @@ const Details = ({ userName }) => {
       fetchData();
     }
   }, [docData]);
+  console.log(data);
 
   const ratingData = {};
   for (const key in docData) {
