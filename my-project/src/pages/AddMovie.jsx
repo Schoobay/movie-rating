@@ -11,7 +11,16 @@ import {
   where,
 } from "firebase/firestore";
 
-const users = ["reuben", "patryk", "callum", "david", "evan", "shane", "neil"];
+const users = [
+  "reuben",
+  "patryk",
+  "callum",
+  "david",
+  "evan",
+  "shane",
+  "neil",
+  "glen",
+];
 
 const renderRatingOptions = () => {
   const options = [];
