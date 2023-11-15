@@ -24,7 +24,16 @@ const Home = () => {
         moviesData.push({ id: doc.id, ...doc.data() });
       });
 
-      let filteredMovies = moviesData;
+      const shuffledMovies = [...moviesData];
+      for (let i = shuffledMovies.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledMovies[i], shuffledMovies[j]] = [
+          shuffledMovies[j],
+          shuffledMovies[i],
+        ];
+      }
+
+      let filteredMovies = shuffledMovies;
 
       if (searchQuery) {
         filteredMovies = moviesData.filter((movie) =>

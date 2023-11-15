@@ -1,12 +1,20 @@
 import React from "react";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import missing from "../assets/missing.png";
 import Rating from "../components/Rating";
+import { useNavigate } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 
 import { db } from "../firebase/config";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  deleteDoc,
+  documentId,
+  collection,
+} from "firebase/firestore";
 
 const Details = ({ userName }) => {
   const { id } = useParams();
@@ -14,6 +22,8 @@ const Details = ({ userName }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [userRatingData, setUserRatingData] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDocument = async () => {
@@ -77,6 +87,23 @@ const Details = ({ userName }) => {
   const averageRating = count > 0 ? sum / count : 0;
   const roundedRating = count > 0 ? Math.round(averageRating * 10) / 10 : 0;
 
+  const deleteDocument = async (documentId) => {
+    const moviesCollection = collection(db, "movies");
+
+    try {
+      const movieDoc = doc(moviesCollection, documentId);
+      await deleteDoc(movieDoc);
+      console.log(`Document with ID ${documentId} deleted successfully.`);
+
+      // Check if the component is still mounted before navigating
+      if (documentId === id) {
+        navigate("/recent-reviews");
+      }
+    } catch (error) {
+      console.error("Error deleting document:", error);
+    }
+  };
+
   return (
     <>
       {isLoading || docData === null ? (
@@ -102,7 +129,7 @@ const Details = ({ userName }) => {
               <span className='font-bold text-cyan-400'>{data.BoxOffice}</span>
             </div>
 
-            <span className='text-left  md:h-auto line-clamp-4 text-cyan-400 pb-6 pt-2 p2-2'>
+            <span className='text-left  md:h-auto line-clamp-6 break-words text-cyan-400 pb-6 pt-2 p2-2'>
               {data.Plot}
             </span>
             <div>
@@ -124,6 +151,15 @@ const Details = ({ userName }) => {
               userName={userName}
               id={id}
             />
+            <div className='text-lg text-red-500 justify-center'>
+              Delete movie{" "}
+              <span>
+                <RiDeleteBin6Fill
+                  className='cursor-pointer inline '
+                  onClick={() => deleteDocument(id)}
+                />
+              </span>
+            </div>
           </div>
         </div>
       )}

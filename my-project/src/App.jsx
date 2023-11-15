@@ -48,7 +48,7 @@ function App() {
     });
 
     return () => {
-      unsubscribe(); // Clean up the auth state listener
+      unsubscribe(); // Clean up the auth
     };
   }, []);
 

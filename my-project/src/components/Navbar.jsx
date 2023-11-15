@@ -71,12 +71,12 @@ const Navbar = () => {
                 onChange={handleInputChange}
               />
             </form>
-            {/* <button
+            <button
               onClick={handleLogout}
-              className='bg-orange-500 rounded-full py-2 px-3 inline ml-8'
+              className='md:bg-orange-500 md:rounded-full md:py-2 md:px-3 md:inline md:ml-8 hidden'
             >
               Logout
-            </button> */}
+            </button>
           </div>
         </div>
       </nav>
