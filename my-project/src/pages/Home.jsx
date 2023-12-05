@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
 import { db } from "../firebase/config";
-import { getDocs, collection, query, limit } from "firebase/firestore";
+import { getDocs, collection, query, limit, where } from "firebase/firestore";
 
 import { useSearchContext } from "../hooks/SearchContext";
 
@@ -16,34 +16,41 @@ const Home = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const q = query(collection(db, "movies"), limit(800));
-      const querySnapshot = await getDocs(q);
+      if (!searchQuery) {
+        const q = query(collection(db, "movies"), limit(10));
+        const querySnapshot = await getDocs(q);
 
-      const moviesData = [];
-      querySnapshot.forEach((doc) => {
-        moviesData.push({ id: doc.id, ...doc.data() });
-      });
+        const moviesData = [];
+        querySnapshot.forEach((doc) => {
+          moviesData.push({ id: doc.id, ...doc.data() });
+        });
 
-      const shuffledMovies = [...moviesData];
-      for (let i = shuffledMovies.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffledMovies[i], shuffledMovies[j]] = [
-          shuffledMovies[j],
-          shuffledMovies[i],
-        ];
+        const shuffledMovies = [...moviesData];
+        for (let i = shuffledMovies.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffledMovies[i], shuffledMovies[j]] = [
+            shuffledMovies[j],
+            shuffledMovies[i],
+          ];
+        }
+        setMovieData(shuffledMovies);
       }
-
-      let filteredMovies = shuffledMovies;
 
       if (searchQuery) {
-        filteredMovies = moviesData.filter((movie) =>
-          movie.title && searchQuery
-            ? movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-            : false
+        const queryFilter = query(
+          collection(db, "movies"),
+          where("title", ">=", searchQuery),
+          where("title", "<=", searchQuery + "\uf8ff")
         );
+        const filterQuerySnapshot = await getDocs(queryFilter);
+
+        const filteredMovies = filterQuerySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setMovieData(filteredMovies);
       }
 
-      setMovieData(filteredMovies);
       setIsLoading(false);
     };
 
