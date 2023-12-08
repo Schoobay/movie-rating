@@ -66,25 +66,29 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <Card className='mt-6 w-96'>
-          <CardHeader color='blue-gray' className='relative h-56'>
+        <Card className='mt-6 md:w-96 max-w-sm md:h-[500px] h-[440px] relative flex'>
+          <CardHeader color='blue-gray' className='relative md:h-64 max-h-96'>
             <img
-              src='https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80'
+              src={data.Poster ? data.Poster : missing}
               alt='card-image'
+              className='object-center w-full'
             />
           </CardHeader>
-          <CardBody>
+          <CardBody className='flex flex-col justify-between'>
             <Typography variant='h5' color='blue-gray' className='mb-2'>
-              UI/UX Review Check
+              {title}
             </Typography>
-            <Typography>
-              The place is close to Barceloneta Beach and bus stop just 2 min by
-              walk and near to &quot;Naviglio&quot; where you can enjoy the main
-              night life in Barcelona.
+            <Typography className='overflow-hidden md:h-14 h-10 text-sm'>
+              {data ? data.Plot : ""}
             </Typography>
           </CardBody>
-          <CardFooter className='pt-0'>
-            <Button>Read More</Button>
+          <CardFooter className='flex gap-3 w-36 absolute bottom-2'>
+            <Button className='bg-amber-300 h-12 text-xs w-16 p-2 md:w-auto md:h-auto md:whitespace-nowrap'>
+              Rating: {roundedRating}
+            </Button>
+            <Button className='h-12 text-xs w-16 p-2 md:w-20 md:h-auto md:whitespace-nowrap'>
+              IMDB: {data.imdbRating}
+            </Button>
           </CardFooter>
         </Card>
       )}

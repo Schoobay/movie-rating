@@ -26,6 +26,7 @@ import Home from "./pages/Home";
 import Details from "./pages/Details";
 import AddMovie from "./pages/AddMovie";
 import RecentReviews from "./pages/RecentReviews";
+import AddMoviecopy from "./pages/AddMoviecopy";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -84,7 +85,7 @@ function App() {
             />
             <Route
               path='/add-movie'
-              element={<AddMovie userName={userName} />}
+              element={<AddMoviecopy userName={userName} />}
             />
             <Route path='/recent-reviews' element={<RecentReviews />} />
             <Route

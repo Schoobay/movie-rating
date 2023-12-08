@@ -129,7 +129,7 @@ const Details = ({ userName }) => {
               <span className='font-bold text-cyan-400'>{data.BoxOffice}</span>
             </div>
 
-            <span className='text-left  md:h-auto line-clamp-6 break-words text-cyan-400 pb-6 pt-2 p2-2'>
+            <span className='text-left  md:h-auto  break-words text-cyan-400 pb-6 pt-2 p2-2'>
               {data.Plot}
             </span>
             <div>

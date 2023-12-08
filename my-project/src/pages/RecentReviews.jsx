@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import MovieCard from "../components/MovieCard";
+import MovieCardcopy from "../components/MovieCardcopy";
 
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -55,7 +55,7 @@ const RecentReviews = () => {
                 to={`/details/${movie.id}`}
                 className='flex items-center min-w-full'
               >
-                <MovieCard
+                <MovieCardcopy
                   key={index}
                   image={movie.image}
                   title={movie.title}
