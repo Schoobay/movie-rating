@@ -66,30 +66,40 @@ const MovieCard = ({ title, image, description, rating, movie }) => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <Card className='mt-6 md:w-96 max-w-sm md:h-[500px] h-[440px] relative flex'>
-          <CardHeader color='blue-gray' className='relative md:h-64 max-h-96'>
-            <img
-              src={data.Poster ? data.Poster : missing}
-              alt='card-image'
-              className='object-center w-full'
-            />
+        <Card
+          shadow={false}
+          className='relative grid md:h-[40rem] h-96 w-full max-w-[28rem] items-end justify-center overflow-hidden text-center'
+        >
+          <CardHeader
+            floated={false}
+            shadow={false}
+            color='transparent'
+            style={{
+              backgroundImage: `url('${data?.Poster ? data.Poster : missing}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className={"absolute inset-0 m-0 h-full w-full rounded-none"}
+          >
+            <div className='to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50' />
           </CardHeader>
-          <CardBody className='flex flex-col justify-between'>
-            <Typography variant='h5' color='blue-gray' className='mb-2'>
+          <CardBody className='relative py-14 px-6 md:px-12'>
+            <Typography
+              variant='h2'
+              color='white'
+              className='mb-6 text-xl font-bold leading-[1] max-h-20 w-40 overflow-hidden p-2'
+            >
               {title}
             </Typography>
-            <Typography className='overflow-hidden md:h-14 h-10 text-sm'>
-              {data ? data.Plot : ""}
-            </Typography>
+            <div className='w-36 flex md:h-auto flex-col gap-1 mx-auto'>
+              <Button className='bg-amber-300 h-12 text-xs w-full p-2 md:w-auto md:h-auto md:whitespace-nowrap'>
+                Rating: {roundedRating}
+              </Button>
+              <Button className='h-12 text-xs w-full p-2  md:h-auto md:whitespace-nowrap'>
+                IMDB: {data.imdbRating}
+              </Button>
+            </div>
           </CardBody>
-          <CardFooter className='flex gap-3 w-36 absolute bottom-2'>
-            <Button className='bg-amber-300 h-12 text-xs w-16 p-2 md:w-auto md:h-auto md:whitespace-nowrap'>
-              Rating: {roundedRating}
-            </Button>
-            <Button className='h-12 text-xs w-16 p-2 md:w-20 md:h-auto md:whitespace-nowrap'>
-              IMDB: {data.imdbRating}
-            </Button>
-          </CardFooter>
         </Card>
       )}
     </>
