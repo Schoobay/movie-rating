@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -51,6 +52,8 @@ const AddMovie = ({ userName }) => {
   const [error, setError] = useState(false);
   const [titleError, setTitleError] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     setUser(userName);
   }, []);
@@ -92,12 +95,32 @@ const AddMovie = ({ userName }) => {
       }
     } else {
     }
+    navigate("/recent-reviews");
   };
 
   const options = [
-    0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5,
-    8.0, 8.5, 9.0, 9.5, 10.0,
+    "0.5",
+    "1.0",
+    "1.5",
+    "2.0",
+    "2.5",
+    "3.0",
+    "3.5",
+    "4.0",
+    "4.5",
+    "5.0",
+    "5.5",
+    "6.0",
+    "6.5",
+    "7.0",
+    "7.5",
+    "8.0",
+    "8.5",
+    "9.0",
+    "9.5",
+    "10.0",
   ];
+  const handleSelectChange = (selectedVal) => setRating(selectedVal);
 
   return (
     <>
@@ -135,9 +158,8 @@ const AddMovie = ({ userName }) => {
               <Select
                 id='rating'
                 size='lg'
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
                 label='Select Rating'
+                onChange={handleSelectChange}
               >
                 {options.map((option) => (
                   <Option key={option} value={option}>
